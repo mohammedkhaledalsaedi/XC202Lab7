@@ -24,22 +24,22 @@ int main() {
 
     while ((bit = fgetc(inputFile)) != EOF) {
         if (bit == '0' || bit == '1') {
-            // Shift bits to the left and add the new bit at the LSB position
+            
             byte = (byte >> 1) | ((bit - '0') << 7);
             bitCount++;
 
-            // When we have 8 bits, write to the output file
+            
             if (bitCount == BYTE_SIZE) {
                 fprintf(outputFile, "%02X\n", byte);
-                byte = 0; // Reset byte for the next set of bits
-                bitCount = 0; // Reset bit count
+                byte = 0; 
+                bitCount = 0; 
             }
         }
     }
 
-    // Handle any remaining bits (if total bits is not a multiple of 8)
+    
     if (bitCount > 0) {
-        byte >>= (BYTE_SIZE - bitCount); // Shift to fill remaining bits
+        byte >>= (BYTE_SIZE - bitCount); 
         fprintf(outputFile, "%02X\n", byte);
     }
 
